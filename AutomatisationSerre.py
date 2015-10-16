@@ -464,7 +464,6 @@ def OnOFF(var):
    else:
       return "ON"
 def LumiereKill():
-    global HeureActuelle
     global HeureArretEclairage
     if ArretEclairage:
         HeureArretEclairage = config['HeureArretEclairage']
@@ -528,11 +527,11 @@ def Debug():
 #s'occupe de vérifier s'il faut éteindre les lumières selon l'heure.
 def VerifieHeure():
     global ArretEclairage
-    global HeureArretEclairage
     if (HeureActuelle<HeureActivationEclairage) or (HeureActuelle>HeureArretEclairage):      
         ArretEclairage = True
     else:
         ArretEclairage = False
+        global HeureArretEclairage
         HeureArretEclairage = config['HeureArretEclairage']
 
 #Détermine s'il faut activer ou éteindre un relais selon la valeur des capteurs et les données que l'usager a saisies.

@@ -479,7 +479,7 @@ def MiseAJourHeureActuelle():
    Heure= LeTempsSepare[0]
    global HeureActuelle
    HeureActuelle =int(Heure)
-   print("Current Hour/OFF Hour : %d/%d" % (HeureActuelle, HeureArretEclairage)
+   print("Current Hour/OFF Hour : %d/%d" % (HeureActuelle, HeureArretEclairage))
    VerifieHeure()
    Historique()
    #Pour des tests seulement.

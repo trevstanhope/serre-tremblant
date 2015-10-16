@@ -534,7 +534,6 @@ def VerifieHeure():
         ArretEclairage = True
     else:
         ArretEclairage = False
-        HeureArretEclairage = config['HeureArretEclairage']
 
 #Détermine s'il faut activer ou éteindre un relais selon la valeur des capteurs et les données que l'usager a saisies.
 def MiseAJourEtatEtValeurReel():

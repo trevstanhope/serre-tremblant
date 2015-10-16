@@ -796,8 +796,8 @@ BacA.grid(column=1, row=1,columnspan=2)
 BacA =  Label(root, text='Bac 2:',font = "Arial 16 bold")
 BacA.grid(column=3, row=1,columnspan=2)
 
-KillSwitch = Button(root, text="Kill Switch", command=LumiereKill, font = FonteTexte)
-KillSwitch.grid(column=2, row=9,columnspan=2)
+KillSwitch = Button(root, text="Kill Switch", command=LumiereKill, font = FonteTexte, padx=20, pady=20)
+KillSwitch.grid(column=2, row=9, columnspan=2)
 
 TVRHumA= str(VRHumA)
 TVRHumB= str(VRHumB)

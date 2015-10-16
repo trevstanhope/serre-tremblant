@@ -123,8 +123,8 @@ ModuleLampe = serial.Serial("/dev/ttyUSB0",115200)
 
 #Sert à déterminer entre quelle heure et quelle heure l'éclairage est activé peu importe ce que l'usager a saisi dans l'interface.
 #Sert à fournir une période de repos aux plantes.
-HeureActivationEclairage = 6
-HeureArretEclairage = 22
+HeureActivationEclairage = config['HeureActivationEclairage']
+HeureArretEclairage = config['HeureArretEclairage']
 
 #pour inverser la valeur des capteurs de lumière Bac 1 <-> Bac 2
 InversionCapteurLumiere = True
@@ -162,15 +162,15 @@ EtatValveDVoulue = False
 EtatLumiereAVoulue = False
 EtatLumiereBVoulue = False
 
-#Utilisé pour faire des tests
-#désactive les relais des lumières 
-FermetureDesRelaisLumiere = False
 #Écrit un fichier avec plus d'information que l'historique
 LogDebug = False
+
 #Combien de boucle de lecture et d'écrite est écrit dans le fichier debug
 DebugNombreDentree=10
+
 #Compteur pour calculer le nombre d'entrée écrite 
 DebugCompteurNombreEntree=0
+
 #L'heure de la dernière écriture dans le fichier debug
 DebugHeureDerniereEntree=0
     
@@ -273,7 +273,7 @@ def CommunicationModulesLampe():
         PremierePasseLumiere = False
 
     #On ferme les lumières si c'est la nuit(ou les heures d'éclairage décidées)
-    if (ArretEclairage is True) and (FermetureDesRelaisLumiere is False):
+    if (ArretEclairage is True):
         if(ValeurModuleLumiereA !=0) and (ValeurModuleLumiereB!=0):
             ModuleLumiereAEtat = False
             ModuleLumiereAMax = False
@@ -394,6 +394,7 @@ def CommunicationArduino():
             if EtatLumiereAVoulue is False:
                 ArduinoSerie.write(("E"+str(0)+'\n').encode("ASCII"))
             ChangementEtatRelaisLumiereA = False
+        #TODO One of these is not used    
         elif(ChangementEtatRelaisLumiereB is True):
             if EtatLumiereBVoulue is True:
                 ArduinoSerie.write(("F"+str(1)+'\n').encode("ASCII"))
@@ -456,12 +457,16 @@ def lumB():
    LLumB.config(text = selection, font=FonteTexte)
 def writeConfig():
    with open(configpath, 'w') as configfile:
-      configfile.write(json.dumps(config))
+      configfile.write(json.dumps(config, indent=4))
 def OnOFF(var):
    if var == 0:
       return "OFF"
    else:
       return "ON"
+def LumiereKill:
+    global HeureActuelle
+    global HeureArretEclairage
+    HeureArretEclairage = HeureActuelle
 
 #Regarde si l'heure à changé et note l'heure actuelle.
 #Appel les fonctions pour l'historique et celle de la fonction de repos des plantes pour la nuit.
@@ -519,14 +524,13 @@ def Debug():
 #Définie le temps d'éclairage pour le repos des plantes la nuit.
 #s'occupe de vérifier s'il faut éteindre les lumières selon l'heure.
 def VerifieHeure():
-   global ArretEclairage
-   if (FermetureDesRelaisLumiere is True):
-       ArretEclairage = True
-   else:
-       if (HeureActuelle<HeureActivationEclairage) or (HeureActuelle>HeureArretEclairage):      
-          ArretEclairage = True
-       else:
-          ArretEclairage = False
+    global ArretEclairage
+    global HeureArretEclairage
+    if (HeureActuelle<HeureActivationEclairage) or (HeureActuelle>HeureArretEclairage):      
+        ArretEclairage = True
+    else:
+        ArretEclairage = False
+        HeureArretEclairage = config['HeureArretEclairage']
 
 #Détermine s'il faut activer ou éteindre un relais selon la valeur des capteurs et les données que l'usager a saisies.
 def MiseAJourEtatEtValeurReel():
@@ -788,6 +792,9 @@ BacA =  Label(root, text='Bac 1:',font = "Arial 16 bold")
 BacA.grid(column=1, row=1,columnspan=2)
 BacA =  Label(root, text='Bac 2:',font = "Arial 16 bold")
 BacA.grid(column=3, row=1,columnspan=2)
+
+KillSwitch = Button(root, text="Kill Switch", command=LumiereKill, font = FonteTexte)
+KillSwitch.grid(column=3, row=1,columnspan=2)
 
 TVRHumA= str(VRHumA)
 TVRHumB= str(VRHumB)

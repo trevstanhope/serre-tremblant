@@ -479,7 +479,7 @@ def MiseAJourHeureActuelle():
    Heure= LeTempsSepare[0]
    global HeureActuelle
    HeureActuelle =int(Heure)
-   print("Current Hour/OFF Hour : %d/%d" % (HeureActuelle, HeureArretEclairage)
+   print("Current Hour/OFF Hour : %d/%d" % (HeureActuelle, HeureArretEclairage))
    VerifieHeure()
    Historique()
    #Pour des tests seulement.
@@ -534,7 +534,6 @@ def VerifieHeure():
         ArretEclairage = True
     else:
         ArretEclairage = False
-        HeureArretEclairage = config['HeureArretEclairage']
 
 #Détermine s'il faut activer ou éteindre un relais selon la valeur des capteurs et les données que l'usager a saisies.
 def MiseAJourEtatEtValeurReel():

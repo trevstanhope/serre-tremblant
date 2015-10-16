@@ -530,7 +530,7 @@ def Debug():
 def VerifieHeure():
     global ArretEclairage
     global HeureArretEclairage
-    if (HeureActuelle<HeureActivationEclairage) or (HeureActuelle>HeureArretEclairage):      
+    if (HeureActuelle<=HeureActivationEclairage) or (HeureActuelle>=HeureArretEclairage):      
         ArretEclairage = True
     else:
         ArretEclairage = False

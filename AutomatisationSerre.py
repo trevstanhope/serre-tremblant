@@ -463,10 +463,13 @@ def OnOFF(var):
       return "OFF"
    else:
       return "ON"
-def LumiereKill:
+def LumiereKill():
     global HeureActuelle
     global HeureArretEclairage
-    HeureArretEclairage = HeureActuelle
+    if ArretEclairage:
+        HeureArretEclairage = config['HeureArretEclairage']
+    else:
+        HeureArretEclairage = HeureActuelle
 
 #Regarde si l'heure à changé et note l'heure actuelle.
 #Appel les fonctions pour l'historique et celle de la fonction de repos des plantes pour la nuit.

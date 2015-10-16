@@ -469,7 +469,7 @@ def LumiereKill():
         HeureArretEclairage = config['HeureArretEclairage']
     else:
         HeureArretEclairage = HeureActuelle
-    print "Lumiere Killed! %d" % HeureArretEclairage
+    print("Lumiere Killed! %d" % HeureArretEclairage)
 
 #Regarde si l'heure à changé et note l'heure actuelle.
 #Appel les fonctions pour l'historique et celle de la fonction de repos des plantes pour la nuit.

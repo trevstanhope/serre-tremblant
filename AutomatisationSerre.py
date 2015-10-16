@@ -469,7 +469,7 @@ def LumiereKill():
         HeureArretEclairage = config['HeureArretEclairage']
     else:
         HeureArretEclairage = HeureActuelle
-    print("Lumiere Killed! %d" % HeureArretEclairage)
+    #print("Lumiere Kill Pressed! %d" % HeureArretEclairage)
 
 #Regarde si l'heure à changé et note l'heure actuelle.
 #Appel les fonctions pour l'historique et celle de la fonction de repos des plantes pour la nuit.
@@ -479,7 +479,7 @@ def MiseAJourHeureActuelle():
    Heure= LeTempsSepare[0]
    global HeureActuelle
    HeureActuelle =int(Heure)
-   print("Current Hour/OFF Hour : %d/%d" % (HeureActuelle, HeureArretEclairage))
+   #print("Current Hour/OFF Hour : %d/%d" % (HeureActuelle, HeureArretEclairage))
    VerifieHeure()
    Historique()
    #Pour des tests seulement.

@@ -73,7 +73,7 @@ ValeurCapteurLumiereA=0.0
 ValeurCapteurLumiereB=0.0
 
 # Values for averaging
-NUM_SAMPLES = 3
+NUM_SAMPLES = 15
 ValeurCapteurHumiditeA_list = [ValeurCapteurHumiditeA] * NUM_SAMPLES
 ValeurCapteurHumiditeB_list = [ValeurCapteurHumiditeB] * NUM_SAMPLES
 ValeurCapteurHumiditeC_list = [ValeurCapteurHumiditeC] * NUM_SAMPLES
@@ -225,25 +225,25 @@ def LitValeurArduino():
                                                 if(var[0] == TexteCapteurHumiditeA):
                                                         global ValeurCapteurHumiditeA
                                                         global ValeurCapteurHumiditeA_list
-                                                        ValeurCapteurHumiditeA_list.remove(0)
+                                                        ValeurCapteurHumiditeA_list.pop(0)
                                                         ValeurCapteurHumiditeA_list.append(var[1])
                                                         ValeurCapteurHumiditeA = int(np.median(ValeurCapteurHumiditeA_list))
                                                 if(var[0] == TexteCapteurHumiditeB):
                                                         global ValeurCapteurHumiditeB
                                                         global ValeurCapteurHumiditeB_list
-                                                        ValeurCapteurHumiditeB_list.remove(0)
+                                                        ValeurCapteurHumiditeB_list.pop(0)
                                                         ValeurCapteurHumiditeB_list.append(var[1])
                                                         ValeurCapteurHumiditeB = int(np.median(ValeurCapteurHumiditeB_list))
                                                 if(var[0] == TexteCapteurHumiditeC):
                                                         global ValeurCapteurHumiditeC
                                                         global ValeurCapteurHumiditeC_list
-                                                        ValeurCapteurHumiditeC_list.remove(0)
+                                                        ValeurCapteurHumiditeC_list.pop(0)
                                                         ValeurCapteurHumiditeC_list.append(var[1])
                                                         ValeurCapteurHumiditeC = int(np.median(ValeurCapteurHumiditeC_list))
                                                 if(var[0] == TexteCapteurHumiditeD):
                                                         global ValeurCapteurHumiditeD
                                                         global ValeurCapteurHumiditeD_list
-                                                        ValeurCapteurHumiditeD_list.remove(0)
+                                                        ValeurCapteurHumiditeD_list.pop(0)
                                                         ValeurCapteurHumiditeD_list.append(var[1])
                                                         ValeurCapteurHumiditeD = int(np.median(ValeurCapteurHumiditeD_list))
 

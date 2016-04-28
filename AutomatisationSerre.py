@@ -561,6 +561,13 @@ def MiseAJourEtatEtValeurReel():
    global EtatValveDVoulue
    global EtatLumiereAVoulue
    global EtatLumiereBVoulue
+   global VRHumA
+   global VRHumB
+   global VRHumC
+   global VRHumD
+   global VRLumA
+   global VRLumB
+   
    MiseAJourHeureActuelle()
    ChangeEtat()
    if (HumiditeVoulueA > VRHumA):

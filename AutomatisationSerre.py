@@ -73,7 +73,7 @@ ValeurCapteurLumiereA=0.0
 ValeurCapteurLumiereB=0.0
 
 # Values for averaging
-NUM_SAMPLES = 60
+NUM_SAMPLES = 3
 ValeurCapteurHumiditeA_list = [ValeurCapteurHumiditeA] * NUM_SAMPLES
 ValeurCapteurHumiditeB_list = [ValeurCapteurHumiditeB] * NUM_SAMPLES
 ValeurCapteurHumiditeC_list = [ValeurCapteurHumiditeC] * NUM_SAMPLES

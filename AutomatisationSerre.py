@@ -2,17 +2,14 @@
 AutomatisationSerre.py
 
 Bac 1
-Valve/Humidity A,B
-Lumiere A
+Valve/Hum Lumiere A
 
 Bac 2
 Valve/Humidity C,D
 Lumiere B
 
 Nord
-Valve/Humidity A,C
-
-Sud
+Valve/Humidity A,C Sud
 Valve/Humidity B,D
 """
 
@@ -23,6 +20,7 @@ from tkinter import ttk
 import os
 import time
 import json
+import numpy as np
 
 #Texte pour le protocole de communication avec arduino. Utilisy pour la lecture de donnees du arduino -> raspberry pi
 #R pour relais V pour valve
@@ -73,6 +71,16 @@ ValeurCapteurHumiditeC=0.0
 ValeurCapteurHumiditeD=0.0
 ValeurCapteurLumiereA=0.0
 ValeurCapteurLumiereB=0.0
+
+# Values for averaging
+NUM_SAMPLES = 60
+ValeurCapteurHumiditeA_list = [ValeurCapteurHumiditeA] * NUM_SAMPLES
+ValeurCapteurHumiditeB_list = [ValeurCapteurHumiditeB] * NUM_SAMPLES
+ValeurCapteurHumiditeC_list = [ValeurCapteurHumiditeC] * NUM_SAMPLES
+ValeurCapteurHumiditeD_list = [ValeurCapteurHumiditeD] * NUM_SAMPLES
+ValeurCapteurLumiereA_list = [ValeurCapteurLumiereA] * NUM_SAMPLES
+ValeurCapteurLumiereB_list = [ValeurCapteurLumiereB] * NUM_SAMPLES
+
 
 # Voulue (Targets)
 configpath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'Historique', 'Configuration')
@@ -212,22 +220,32 @@ def LitValeurArduino():
                                                 if(var[0] == TexteRelaisLumiereB):
                                                         global EtatRelaisLumiereB
                                                         EtatRelaisLumiereB = int(var[1])
-                                                        
+
+                                                # Soil Moisture Sensors
                                                 if(var[0] == TexteCapteurHumiditeA):
                                                         global ValeurCapteurHumiditeA
-                                                        ValeurCapteurHumiditeA = int(var[1])
-                                                        
+                                                        global ValeurCapteurHumiditeA_list
+                                                        ValeurCapteurHumiditeA_list.remove(0)
+                                                        ValeurCapteurHumiditeA_list.append(var[1])
+                                                        ValeurCapteurHumiditeA = int(np.median(ValeurCapteurHumiditeA_list))
                                                 if(var[0] == TexteCapteurHumiditeB):
                                                         global ValeurCapteurHumiditeB
-                                                        ValeurCapteurHumiditeB = int(var[1])
-                                                        
+                                                        global ValeurCapteurHumiditeB_list
+                                                        ValeurCapteurHumiditeB_list.remove(0)
+                                                        ValeurCapteurHumiditeB_list.append(var[1])
+                                                        ValeurCapteurHumiditeB = int(np.median(ValeurCapteurHumiditeB_list))
                                                 if(var[0] == TexteCapteurHumiditeC):
                                                         global ValeurCapteurHumiditeC
-                                                        ValeurCapteurHumiditeC = int(var[1])
-                                                        
+                                                        global ValeurCapteurHumiditeC_list
+                                                        ValeurCapteurHumiditeC_list.remove(0)
+                                                        ValeurCapteurHumiditeC_list.append(var[1])
+                                                        ValeurCapteurHumiditeC = int(np.median(ValeurCapteurHumiditeC_list))
                                                 if(var[0] == TexteCapteurHumiditeD):
                                                         global ValeurCapteurHumiditeD
-                                                        ValeurCapteurHumiditeD = int(var[1])
+                                                        global ValeurCapteurHumiditeD_list
+                                                        ValeurCapteurHumiditeD_list.remove(0)
+                                                        ValeurCapteurHumiditeD_list.append(var[1])
+                                                        ValeurCapteurHumiditeD = int(np.median(ValeurCapteurHumiditeD_list))
 
                                                 #Condition pour inverser les capteurs d'humidité(bac1<-->bac2), les fils on été inversés.         
                                                 global ValeurCapteurLumiereA
